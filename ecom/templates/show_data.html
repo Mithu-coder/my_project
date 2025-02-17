@@ -4,14 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table,th,td,tr{
+            border:1px solid green;
+            border-collapse: collapes;
+        }
+    </style>
 </head>
 <body>
-    <ul>
-        {% for i in all %}
-        <li>Name:{{i.name}}</li>
-        <li>Age: {{i.age}}</li>
-        <li>email: {{i.email}}</li>
-        {% endfor %}
-    </ul>
+    <table>
+        <tr>
+            <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            </thead>
+        </tr>
+            <tbody>
+                {% for i in all %}
+                <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.age}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </tr>
+    </table>
 </body>
 </html>
