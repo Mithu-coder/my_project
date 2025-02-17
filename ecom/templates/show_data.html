@@ -15,6 +15,7 @@
     <table>
             <thead>
             <tr>
+                <th>Id</th>
             <th>Name</th>
             <th>Email</th>
             <th>Age</th>
@@ -23,6 +24,7 @@
             <tbody>
                 {% for i in all %}
                 <tr>
+                    <td>{{i.id}}</td>
                 <td>{{i.name}}</td>
                 <td>{{i.email}}</td>
                 <td>{{i.age}}</td>
