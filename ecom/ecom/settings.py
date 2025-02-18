@@ -1,5 +1,5 @@
 import os
-
+import cx_Oracle
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -64,13 +64,32 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.oracle',
+#         'NAME': 'localhost:1521/orclpdb',  # EZCONNECT format
+#         'USER': 'ppc01',
+#         'PASSWORD': 'ppc01',
+#     }
+# }
+
+dsn_tns = cx_Oracle.makedsn('localhost', 1521, service_name='orclpdb')
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': dsn_tns,
+        'USER': 'pbc01',
+        'PASSWORD': 'pbc01',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -106,17 +125,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+#STATIC FILES SETTINGS
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
-#STATIC_ROOT=os.path.join(BASE_DIR,'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # For additional static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For production (after collectstatic)
 
-MEDIA_URL='/media/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+# MEDIA FILES SETTINGS (For Uploaded Images)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+cx_Oracle.init_oracle_client(lib_dir=r"C:\instantclient_23_7")
 
 
 
